@@ -1,3 +1,19 @@
+@mixin mobile {
+  @media screen and (max-width: 480px) {
+    @content;
+  }
+}
+@mixin tablet {
+  @media screen and (max-width: 720px) {
+    @content;
+  }
+}
+@mixin laptop {
+  @media screen and (max-width: 1200px) {
+    @content;
+  }
+}
+
 .formContainer {
   display: flex;
   align-items: center;
@@ -38,16 +54,16 @@
           height: 30px;
         }
       }
-    }
-    button {
-      cursor: pointer;
-      border: none;
-      background-color: rgb(134, 101, 181);
-      color: #ffffff;
-      padding: 8px;
-      width: 100px;
-      font-weight: 500;
-      border-radius: 5px;
+      button {
+        cursor: pointer;
+        border: none;
+        background-color: rgb(134, 101, 181);
+        color: #ffffff;
+        padding: 8px;
+        width: 100%;
+        font-weight: 500;
+        border-radius: 5px;
+      }
     }
 
     p {
@@ -70,10 +86,14 @@
     border-radius: 10px;
     display: flex;
     overflow: hidden;
+    @include tablet {
+      width: 90%;
+    }
 
     .sidebar {
       flex: 1;
       background-color: #3e3c61;
+      position: relative;
 
       .navbar {
         display: flex;
@@ -83,7 +103,11 @@
         height: 50px;
         padding: 10px;
         color: #ffff;
-
+        .logo {
+          @include mobile {
+            display: none;
+          }
+        }
         .user {
           display: flex;
           align-items: center;
@@ -107,6 +131,11 @@
             font-size: 10px;
             color: #ffff;
             cursor: pointer;
+            @include tablet {
+              position: absolute;
+              bottom: 10px;
+              left: 10%;
+            }
           }
         }
       }
