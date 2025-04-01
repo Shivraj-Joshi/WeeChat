@@ -19,22 +19,43 @@ const Register = () => {
       }
       // creating a user
       const user = await account.create(ID.unique(), email, password, name);
+      console.log(user);
+      console.log("userID:", user.$id);
       // creating a storage bucket for user's profile picture
       const profile = await storage.createFile(
         "67e95bd700161896f461",
         ID.unique(),
         pic
       );
+      console.log(profile);
+      // debugging
+      // console.log("Creating document with data:", {
+      //   name,
+      //   email,
+      //   userId: user.$id,
+      //   profilePic: profile.$id,
+      // });
 
-      const dataBase = await db.createDocument("67e9675d000d1762afe5", "$id", {
+      const dataBase = await db.createDocument(
+        "67e9675d000d1762afe5", //database id
+        "67eaae8f0035eb148bc2", //collection id
+        ID.unique(), //unique id
+        {
+          name,
+          email,
+          userId: user.$id,
+          profilePic: profile.$id,
+        }
+      );
+      // debugging database error
+      console.log("dataBase document created:", {
         name,
         email,
+        userid: user.$id,
+        proilfePic: profile.$id,
       });
-      console.log(user);
-      console.log(user.$id);
-      console.log(profile);
     } catch (error) {
-      console.log("Error:", error);
+      console.log("Error:", error.message, error);
     }
   };
 
