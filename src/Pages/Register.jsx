@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { account, db } from "../../src/appWrite.js";
 import { storage } from "../../src/appWrite.js";
 import add from "../assets/addAvatar.png";
+import { NavLink } from "react-router";
 import { ID } from "appwrite";
 const Register = () => {
   const [name, setName] = useState("");
@@ -92,7 +93,9 @@ const Register = () => {
           <button>Sign up</button>
         </form>
 
-        <p>Already have an account ? Login</p>
+        <p>
+          Already have an account ? <NavLink to="/login">Login</NavLink>{" "}
+        </p>
       </div>
     </div>
   );
